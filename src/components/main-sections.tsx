@@ -1,61 +1,45 @@
+import { useLanguage } from '../contexts/language-context'
+
+const sectionClass =
+  'scroll-mt-24 space-y-3 border-t border-slate-200 pt-8 sm:space-y-4 sm:pt-10 dark:border-slate-700'
+
+const chapterClass =
+  'text-lg font-medium text-[#6f9cff] sm:text-xl dark:text-[#93b5ff]'
+
+const headingClass =
+  'mb-6 text-balance text-3xl font-semibold leading-tight text-slate-900 sm:mb-8 sm:text-4xl md:text-5xl dark:text-slate-100'
+
+const bodyClass =
+  'text-base leading-relaxed text-pretty text-slate-700 [word-break:keep-all] sm:text-lg md:text-2xl dark:text-slate-300'
+
 export function WelcomeSection() {
+  const { t } = useLanguage()
+
   return (
-    <section id="welcome" className="scroll-mt-24 space-y-4">
-      <h3 className="text-xl font-medium text-slate-500 dark:text-slate-400">
-        01 - 소개
-      </h3>
-      <h2 className="text-5xl font-semibold text-slate-900 dark:text-slate-100">
-        HIGHER는 어떤 동아리인가
-      </h2>
-      <div className="space-y-4 text-2xl leading-relaxed text-slate-700 dark:text-slate-300">
-        <p>
-          우리는 화려한 시작점이나 뛰어난 배경을 가진 사람들만 모인 곳이 아니라,
-          각자의 위치에서 출발해 함께 논리적 사고의 정수인 알고리즘을 통해 문제 해결
-          능력을 키워나가는 것을 목표로 합니다.
-        </p>
+    <section id="welcome" className={sectionClass}>
+      <h3 className={chapterClass}>{t.welcome.chapter}</h3>
+      <h2 className={headingClass}>{t.welcome.title}</h2>
+      <div className={`space-y-4 ${bodyClass}`}>
+        <p>{t.welcome.body}</p>
       </div>
     </section>
   )
 }
 
-const activities = [
-  {
-    title: '알고리즘 세미나',
-    body:
-      '자료구조와 알고리즘 핵심 이론을 스터디로 차근히 익히고, 백준 등 여러 플랫폼 문제를 풀며 실전 감각을 키웁니다. ICPC 같은 대회를 함께 준비하고, Codeforces·AtCoder 온라인 라운드도 꾸준히 참여합니다.',
-  },
-  {
-    title: '정기 세미나',
-    body:
-      '개발 과정에서 바로 도움이 되는 이슈와 노하우를 정기적으로 공유합니다. 신규 부원을 위한 입문 주제부터 코딩 테스트, 인턴십, 협업 툴 활용까지 폭넓게 다룹니다.',
-  },
-  {
-    title: '자유 프로젝트 협업',
-    body: '아이디어를 직접 구현하고 팀으로 협업하면서, 실제 서비스 제작에 가까운 경험을 쌓아갑니다.',
-  },
-] as const
-
 export function ActivitiesSection() {
+  const { t } = useLanguage()
+
   return (
-    <section id="activities" className="scroll-mt-24 space-y-4">
-      <h3 className="text-xl font-medium text-slate-500 dark:text-slate-400">
-        02 - 활동
-      </h3>
-      <h2 className="text-5xl font-semibold text-slate-900 dark:text-slate-100">
-        함께하는 프로그램
-      </h2>
-      <ul className="space-y-6">
-        {activities.map(({ title, body }) => (
-          <li
-            key={title}
-            className="list-none"
-          >
-            <p className="text-2xl font-semibold text-slate-900 dark:text-slate-100">
-              {title}
+    <section id="activities" className={sectionClass}>
+      <h3 className={chapterClass}>{t.activities.chapter}</h3>
+      <h2 className={headingClass}>{t.activities.title}</h2>
+      <ul className="space-y-5 sm:space-y-6">
+        {t.activities.items.map((item) => (
+          <li key={item.title} className="list-none">
+            <p className="text-2xl font-semibold text-balance text-slate-900 sm:text-3xl dark:text-slate-100">
+              {item.title}
             </p>
-            <p className="mt-2 text-2xl leading-relaxed text-slate-700 dark:text-slate-300">
-              {body}
-            </p>
+            <p className={`mt-2 ${bodyClass}`}>{item.body}</p>
           </li>
         ))}
       </ul>
@@ -63,27 +47,64 @@ export function ActivitiesSection() {
   )
 }
 
-const audience = [
-  '함께 배우고 성장하며, 사람들과 활발히 교류하고 싶은 분',
-  'HIGHER의 일원으로 ICPC 참가를 목표로 도전하실 분',
-  '노베이스라도 시작할 용기가 있는 분',
-  '커피를 조금 많이 좋아하는 분 ☕',
-] as const
-
 export function AudienceSection() {
+  const { t } = useLanguage()
+
   return (
-    <section id="audience" className="scroll-mt-24 space-y-4">
-      <h3 className="text-xl font-medium text-slate-500 dark:text-slate-400">
-        03 - 모집
-      </h3>
-      <h2 className="text-5xl font-semibold text-slate-900 dark:text-slate-100">
-        이런 분들과 함께합니다
-      </h2>
-      <ul className="space-y-2 text-2xl leading-relaxed text-slate-700 dark:text-slate-300">
-        {audience.map((line) => (
+    <section id="audience" className={sectionClass}>
+      <h3 className={chapterClass}>{t.audience.chapter}</h3>
+      <h2 className={headingClass}>{t.audience.title}</h2>
+      <ul className="space-y-2 text-base leading-relaxed text-pretty text-slate-700 [word-break:keep-all] sm:text-lg md:text-2xl dark:text-slate-300">
+        {t.audience.lines.map((line) => (
           <li key={line}>{line}</li>
         ))}
       </ul>
+    </section>
+  )
+}
+
+export function ApplySection() {
+  const { t } = useLanguage()
+
+  return (
+    <section id="apply" className={sectionClass}>
+      <h3 className={chapterClass}>{t.apply.chapter}</h3>
+      <h2 className={headingClass}>{t.apply.title}</h2>
+      <dl className="space-y-6 sm:space-y-7">
+        <div>
+          <dt className="text-2xl font-semibold text-slate-900 sm:text-3xl dark:text-slate-100">
+            {t.apply.periodLabel}
+          </dt>
+          <dd className={`mt-2 ${bodyClass}`}>{t.apply.period}</dd>
+        </div>
+        <div>
+          <dt className="text-2xl font-semibold text-slate-900 sm:text-3xl dark:text-slate-100">
+            {t.apply.feeLabel}
+          </dt>
+          <dd className={`mt-2 ${bodyClass}`}>{t.apply.fee}</dd>
+        </div>
+        <div>
+          <dt className="text-2xl font-semibold text-slate-900 sm:text-3xl dark:text-slate-100">
+            {t.apply.applyLabel}
+          </dt>
+          <dd className="mt-2">
+            <a
+              href={t.apply.applyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`inline-block ${bodyClass} text-[#6f9cff] underline underline-offset-2 transition hover:text-[#5a8aef] dark:text-[#93b5ff] dark:hover:text-[#a8c4ff]`}
+            >
+              {t.apply.applyLinkText}
+            </a>
+          </dd>
+        </div>
+        <div>
+          <dt className="text-2xl font-semibold text-slate-900 sm:text-3xl dark:text-slate-100">
+            {t.apply.contactLabel}
+          </dt>
+          <dd className={`mt-2 ${bodyClass}`}>{t.apply.contact}</dd>
+        </div>
+      </dl>
     </section>
   )
 }

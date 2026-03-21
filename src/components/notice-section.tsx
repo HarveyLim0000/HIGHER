@@ -1,50 +1,32 @@
-const notices = [
-  {
-    title: '공지 제목을 여기에 입력하세요',
-    count: 0,
-    href: '#',
-  },
-  {
-    title: '부원 모집 안내 (예시)',
-    count: 0,
-    href: '#',
-  },
-  {
-    title: '활동 일정 안내 (예시)',
-    count: 0,
-    href: '#',
-  },
-] as const
+import { useLanguage } from '../contexts/language-context'
 
 export function NoticeSection() {
+  const { t } = useLanguage()
+
   return (
     <section
       id="notices"
-      className="scroll-mt-24 border-t border-slate-200 pt-10 dark:border-slate-700"
+      className="scroll-mt-24 border-t border-slate-200 pt-8 sm:pt-10 dark:border-slate-700"
     >
-      <div className="space-y-1">
-        <h3 className="text-xl font-medium text-slate-500 dark:text-slate-400">
-          04 - 공지
+      <div className="space-y-3 sm:space-y-4">
+        <h3 className="text-lg font-medium text-[#6f9cff] sm:text-xl dark:text-[#93b5ff]">
+          {t.notice.chapter}
         </h3>
-        <p className="text-5xl font-semibold text-slate-900 dark:text-slate-100">공지</p>
-        <p className="text-xl text-slate-500 dark:text-slate-400">최근 안내 사항</p>
+        <p className="mb-6 text-balance text-3xl font-semibold leading-tight text-slate-900 sm:mb-8 sm:text-4xl md:text-5xl dark:text-slate-100">
+          {t.notice.title}
+        </p>
       </div>
       <ul className="mt-6 space-y-3">
-        {notices.map(({ title, count, href }) => (
+        {t.notice.items.map((item, index) => (
           <li
-            key={title}
-            className="border-b border-slate-200 py-2 text-left text-2xl text-slate-700 dark:border-slate-700 dark:text-slate-300"
+            key={`notice-${index}`}
+            className="border-b border-slate-200 py-2 text-left text-base leading-relaxed text-pretty text-slate-700 [word-break:keep-all] sm:text-lg md:text-2xl dark:border-slate-700 dark:text-slate-300"
           >
             <a
-              href={href}
-              className="leading-relaxed text-slate-700 dark:text-slate-300 underline-offset-2 hover:text-accent hover:underline"
+              href={item.href}
+              className="text-slate-700 underline-offset-2 hover:text-accent hover:underline dark:text-slate-300"
             >
-              {title}{' '}
-              {count > 0 && (
-                <span className="whitespace-nowrap text-slate-600 dark:text-slate-400">
-                  [{count}]
-                </span>
-              )}
+              {item.title}
             </a>
           </li>
         ))}

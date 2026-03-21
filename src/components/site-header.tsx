@@ -1,17 +1,46 @@
 import { useEffect, useState } from 'react'
+import type { MouseEvent } from 'react'
+import { useLanguage } from '../contexts/language-context'
+
+function scrollToSection(href: string) {
+  if (!href.startsWith('#')) {
+    return
+  }
+  const id = href.slice(1)
+  const el = document.getElementById(id)
+  if (!el) {
+    return
+  }
+  el.scrollIntoView({
+    behavior: 'smooth',
+    block: 'start',
+  })
+  window.history.replaceState(null, '', href)
+}
+
+function handleInPageNavClick(
+  event: MouseEvent<HTMLAnchorElement>,
+  href: string,
+) {
+  if (!href.startsWith('#')) {
+    return
+  }
+  event.preventDefault()
+  scrollToSection(href)
+}
 
 const navItems = {
   ko: [
     { label: '소개', href: '#welcome' },
     { label: '활동', href: '#activities' },
-    { label: '지원', href: '#audience' },
     { label: '공지', href: '#notices' },
+    { label: '지원', href: '#apply' },
   ],
   en: [
     { label: 'About', href: '#welcome' },
     { label: 'Activities', href: '#activities' },
-    { label: 'Apply', href: '#audience' },
     { label: 'Notice', href: '#notices' },
+    { label: 'Apply', href: '#apply' },
   ],
 } as const
 
@@ -61,9 +90,32 @@ function GitHubIcon({ className }: { className?: string }) {
   )
 }
 
+function MenuToggleIcon({ open, className }: { open: boolean; className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      aria-hidden
+    >
+      {open ? (
+        <path d="M18 6 6 18M6 6l12 12" />
+      ) : (
+        <>
+          <path d="M4 7h16M4 12h16M4 17h16" />
+        </>
+      )}
+    </svg>
+  )
+}
+
 export function SiteHeader() {
+  const { locale, toggleLocale, t } = useLanguage()
   const [isDarkMode, setIsDarkMode] = useState(false)
-  const [isEnglish, setIsEnglish] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem('theme')
@@ -72,6 +124,24 @@ export function SiteHeader() {
     setIsDarkMode(shouldUseDark)
     document.documentElement.classList.toggle('dark', shouldUseDark)
   }, [])
+
+  useEffect(() => {
+    if (!menuOpen) {
+      return
+    }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setMenuOpen(false)
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [menuOpen])
 
   const toggleTheme = () => {
     setIsDarkMode((prev) => {
@@ -82,34 +152,69 @@ export function SiteHeader() {
     })
   }
 
+  const closeMenu = () => setMenuOpen(false)
+
+  const items = navItems[locale === 'en' ? 'en' : 'ko']
+
+  const linkClass =
+    'shrink-0 rounded-md px-1 py-1 text-slate-700 no-underline transition hover:text-accent dark:text-slate-300'
+
+  const renderNavLink = (
+    { label, href }: (typeof items)[number],
+    onAfter?: () => void,
+  ) => {
+    const isExternal = href.startsWith('http')
+    return (
+      <a
+        key={label}
+        href={href}
+        className={
+          onAfter
+            ? `${linkClass} block w-full py-3 text-left text-lg`
+            : linkClass
+        }
+        {...(isExternal
+          ? {
+              target: '_blank',
+              rel: 'noopener noreferrer',
+            }
+          : {})}
+        onClick={(e) => {
+          if (href.startsWith('#')) {
+            handleInPageNavClick(e, href)
+          }
+          onAfter?.()
+        }}
+      >
+        {label}
+      </a>
+    )
+  }
+
   return (
     <header className="fixed top-0 right-0 left-0 z-50 bg-[#f8f8fb]/45 backdrop-blur-lg transition-colors duration-700 dark:bg-[#171b24]/20 dark:backdrop-blur-xl">
-      <div className="mx-auto grid max-w-5xl grid-cols-[1fr_auto_1fr] items-center px-5 py-2.5 md:px-6 md:py-3.5">
+      <div className="mx-auto flex max-w-5xl items-center justify-between gap-3 px-4 py-2.5 md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-0 md:px-6 md:py-3.5">
         <a
           href="/"
-          className="justify-self-start text-4xl font-bold leading-none text-slate-900 no-underline md:text-5xl dark:text-slate-100"
-          aria-label="HIGHER 홈"
+          className="text-3xl font-bold leading-none text-slate-900 no-underline sm:text-4xl md:justify-self-start md:text-5xl dark:text-slate-100"
+          aria-label={t.header.homeAria}
+          onClick={closeMenu}
         >
-          <span className="self-center tracking-wide md:tracking-wider">
-            HIGHER
-          </span>
+          <span className="tracking-wide md:tracking-wider">HIGHER</span>
         </a>
-        <nav className="flex items-center justify-center gap-x-5 text-base font-medium text-slate-700 md:gap-x-8 md:text-lg dark:text-slate-300">
-          {navItems[isEnglish ? 'en' : 'ko'].map(({ label, href }) => (
-            <a
-              key={label}
-              href={href}
-              className="shrink-0 text-slate-700 no-underline transition hover:text-accent dark:text-slate-300"
-            >
-              {label}
-            </a>
-          ))}
+        <nav
+          aria-label={t.header.menuNavLabel}
+          className="hidden items-center justify-center gap-x-5 text-base font-medium text-slate-700 md:flex md:gap-x-8 md:text-lg dark:text-slate-300"
+        >
+          {items.map((item) => renderNavLink(item))}
         </nav>
-        <div className="flex items-center justify-self-end gap-1.5">
+        <div className="flex shrink-0 items-center gap-1 sm:gap-1.5 md:justify-self-end">
           <button
             type="button"
             className="rounded-md p-1 text-slate-700 transition hover:text-accent dark:text-slate-300"
-            aria-label={isDarkMode ? '라이트 모드로 전환' : '다크 모드로 전환'}
+            aria-label={
+              isDarkMode ? t.header.themeToLight : t.header.themeToDark
+            }
             onClick={toggleTheme}
           >
             {isDarkMode ? (
@@ -129,14 +234,50 @@ export function SiteHeader() {
           </a>
           <button
             type="button"
-            className="rounded-md px-3.5 py-2 text-[17px] font-semibold leading-none text-slate-700 transition hover:text-accent dark:text-slate-300"
-            onClick={() => setIsEnglish((prev) => !prev)}
-            aria-label="영어/한국어 전환"
+            className="rounded-md px-2.5 py-2 text-base font-semibold leading-none text-slate-700 transition hover:text-accent sm:px-3.5 sm:text-[17px] dark:text-slate-300"
+            onClick={toggleLocale}
+            aria-label={t.header.toggleLang}
           >
-            {isEnglish ? 'EN' : 'KR'}
+            {locale === 'en' ? 'EN' : 'KR'}
+          </button>
+          <button
+            type="button"
+            className="rounded-md p-1.5 text-slate-700 transition hover:text-accent md:hidden dark:text-slate-300"
+            aria-expanded={menuOpen}
+            aria-controls="mobile-nav-panel"
+            onClick={() => setMenuOpen((o) => !o)}
+            aria-label={menuOpen ? t.header.menuClose : t.header.menuOpen}
+          >
+            <MenuToggleIcon
+              open={menuOpen}
+              className="h-6 w-6"
+            />
           </button>
         </div>
       </div>
+
+      {menuOpen && (
+        <>
+          <button
+            type="button"
+            tabIndex={-1}
+            className="mobile-nav-backdrop-enter fixed inset-0 z-40 bg-slate-900/30 backdrop-blur-[2px] md:hidden dark:bg-black/40"
+            aria-hidden
+            onClick={closeMenu}
+          />
+          <div
+            id="mobile-nav-panel"
+            className="mobile-nav-panel-enter absolute left-0 right-0 top-full z-50 border-b border-slate-200/90 bg-[#f8f8fb]/95 shadow-lg backdrop-blur-xl dark:border-slate-700/90 dark:bg-[#171b24]/95 md:hidden"
+          >
+            <nav
+              aria-label={t.header.menuNavLabel}
+              className="mx-auto flex max-w-5xl flex-col px-4 py-2 pb-5"
+            >
+              {items.map((item) => renderNavLink(item, closeMenu))}
+            </nav>
+          </div>
+        </>
+      )}
     </header>
   )
 }
