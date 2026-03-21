@@ -62,20 +62,28 @@ export const messages = {
       ],
     },
     notice: {
-      chapter: '04 - 공지',
-      title: '공지',
+      chapter: '04 - 소식',
+      title: '소식',
+      modalClose: '닫기',
       items: [
         {
-          title: '3월 ?일(?) - 첫 번째 활동 일정 안내',
-          href: '#',
-        },
-        {
+          id: 'website-launch',
           title: '3월 22일(일) - 동아리 웹페이지 런칭 관련 안내',
-          href: '#',
+          paragraphs: [
+            '안녕하세요, HIGHER 동아리 회장 임도현입니다.',
+            '동아리 웹페이지가 정식으로 런칭되었습니다!',
+            '이용하시면서 발견되는 버그나 오류, 개선이 필요한 부분이 있다면 편하게 제보해주시면 감사하겠습니다.',
+            '더 좋은 서비스로 발전시켜 나가겠습니다',
+          ],
         },
         {
-          title: '3월 22일(일) - 1기 신입 부원 모집 안내',
-          href: '#',
+          id: 'recruitment-mar-18',
+          title: '3월 18일(수) - 1기 신입부원 모집 안내',
+          paragraphs: [
+            '안녕하세요, HIGHER 동아리 회장 임도현입니다.',
+            '2026년 3월 18일(수)부터 HIGHER 제1기 신입 부원을 모집합니다.',
+            '함께 성장하고 싶은 분들의 많은 지원 부탁드립니다 감사합니다!',
+          ],
         },
       ],
     },
@@ -171,20 +179,28 @@ export const messages = {
       ],
     },
     notice: {
-      chapter: '04 - Notices',
-      title: 'Notices',
+      chapter: '04 - News',
+      title: 'News',
+      modalClose: 'Close',
       items: [
         {
-          title: 'Mar TBD — First activity schedule (TBA)',
-          href: '#',
-        },
-        {
+          id: 'website-launch',
           title: 'Sun, Mar 22 — Club website launch',
-          href: '#',
+          paragraphs: [
+            'Hello, this is Lim Do-hyun, president of HIGHER.',
+            'The club website is now officially live!',
+            'If you spot bugs, errors, or anything we could improve, please feel free to let us know.',
+            'We’ll keep making the experience better for everyone.',
+          ],
         },
         {
-          title: 'Sun, Mar 22 — New member recruitment',
-          href: '#',
+          id: 'recruitment-mar-18',
+          title: 'Wed, Mar 18 — First cohort recruitment',
+          paragraphs: [
+            'Hello, this is Lim Do-hyun, president of HIGHER.',
+            'Starting March 18, 2026 (Wed), we are recruiting members for HIGHER’s first cohort.',
+            'We look forward to applications from everyone who wants to grow with us. Thank you!',
+          ],
         },
       ],
     },

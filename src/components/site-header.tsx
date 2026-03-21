@@ -33,13 +33,13 @@ const navItems = {
   ko: [
     { label: '소개', href: '#welcome' },
     { label: '활동', href: '#activities' },
-    { label: '공지', href: '#notices' },
+    { label: '소식', href: '#notices' },
     { label: '지원', href: '#apply' },
   ],
   en: [
     { label: 'About', href: '#welcome' },
     { label: 'Activities', href: '#activities' },
-    { label: 'Notice', href: '#notices' },
+    { label: 'News', href: '#notices' },
     { label: 'Apply', href: '#apply' },
   ],
 } as const
