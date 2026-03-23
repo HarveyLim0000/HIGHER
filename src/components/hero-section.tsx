@@ -14,7 +14,6 @@ type FontSample = {
   letterSpacing: string
 }
 
-/** 컨테이너 너비에 맞는 최대 글자 크기(px). flex·자간으로 늘리지 않음. */
 function findFontSizeToFitWidth(
   text: string,
   targetWidthPx: number,
@@ -51,9 +50,6 @@ function findFontSizeToFitWidth(
   return Math.min(lo, 220)
 }
 
-/**
- * 모바일: 세 줄이 같은 가로폭 안에서 글자 크기만 달리해 좌·우 끝이 맞도록 함.
- */
 function HeroMobileFitLines() {
   const { t } = useLanguage()
   const containerRef = useRef<HTMLDivElement>(null)

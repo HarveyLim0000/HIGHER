@@ -29,6 +29,8 @@ function handleInPageNavClick(
   scrollToSection(href)
 }
 
+const GITHUB_PROFILE_URL = 'https://github.com/HarveyLim0000'
+
 const navItems = {
   ko: [
     { label: '소개', href: '#welcome' },
@@ -224,11 +226,11 @@ export function SiteHeader() {
             )}
           </button>
           <a
-            href="https://github.com"
+            href={GITHUB_PROFILE_URL}
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             className="rounded-md p-1 text-slate-700 no-underline transition hover:text-accent dark:text-slate-300"
-            aria-label="GitHub"
+            aria-label={t.header.githubProfileAria}
           >
             <GitHubIcon className="h-6 w-6 md:h-7 md:w-7" />
           </a>

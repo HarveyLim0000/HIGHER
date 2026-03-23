@@ -13,6 +13,7 @@ export const messages = {
       menuOpen: '메뉴 열기',
       menuClose: '메뉴 닫기',
       menuNavLabel: '페이지 섹션',
+      githubProfileAria: 'GitHub 프로필 열기',
     },
     hero: {
       taglineA: 'HIGHER AND',
@@ -103,7 +104,7 @@ export const messages = {
       period:
         '신입회원은 상시 모집중이며 건양대학교 학생이면 누구나 가입할 수 있습니다.',
       feeLabel: '회비',
-      fee: '존재하지 않고 노트북과 충전기만 준비해주세요.',
+      fee: '회비는 없습니다. 노트북과 충전기만 준비해주세요.',
       applyLabel: '지원',
       applyUrl: 'https://forms.gle/5bVkj7Tre2jQXb777',
       applyLinkText: '가입 신청서',
@@ -128,6 +129,7 @@ export const messages = {
       menuOpen: 'Open menu',
       menuClose: 'Close menu',
       menuNavLabel: 'Page sections',
+      githubProfileAria: 'Open GitHub profile',
     },
     hero: {
       taglineA: 'HIGHER AND',
