@@ -68,6 +68,16 @@ export const messages = {
       modalClose: '닫기',
       items: [
         {
+          id: 'ot-schedule-mar-24',
+          title: '3월 24일(화) - OT일정 확정',
+          paragraphs: [
+            '안녕하세요, HIGHER 동아리 회장 임도현입니다.',
+            '동아리 첫 활동인 OT 일정이 확정되었습니다.',
+            '공식 활동에 앞서 서로 얼굴을 익히고 앞으로 우리가 나아갈 방향성을 공유하는 중요한 시간이니 저원 참석 부탁드립니다.',
+            '상세 내용은 HIGHER 통합 공지방을 확인해주세요.',
+          ],
+        },
+        {
           id: 'website-launch',
           title: '3월 22일(일) - 동아리 웹페이지 런칭 관련 안내',
           paragraphs: [
@@ -185,6 +195,16 @@ export const messages = {
       title: 'News',
       modalClose: 'Close',
       items: [
+        {
+          id: 'ot-schedule-mar-24',
+          title: 'Tue, Mar 24 — OT schedule confirmed',
+          paragraphs: [
+            'Hello, this is Lim Do-hyun, president of HIGHER.',
+            'The orientation schedule for our first club activity has been confirmed.',
+            'Before official activities begin, this is an important time to get to know each other and share the direction we are heading, so please attend if possible.',
+            'Please check the HIGHER integrated notice chat for details.',
+          ],
+        },
         {
           id: 'website-launch',
           title: 'Sun, Mar 22 — Club website launch',

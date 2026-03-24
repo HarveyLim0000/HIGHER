@@ -2,9 +2,9 @@ import type { Locale } from '../i18n/messages'
 
 export const CLUB_FOUNDED_AT = new Date(2026, 2, 18)
 
-export const CLUB_MEMBER_COUNT = 12
+export const CLUB_MEMBER_COUNT = 13
 
-export const CLUB_STUDENT_ID_TOTAL_SUM = 300
+export const CLUB_STUDENT_ID_TOTAL_SUM = 326
 
 export function getDaysSinceFounded(now = new Date()): number {
   const start = new Date(
