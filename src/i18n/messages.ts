@@ -68,6 +68,15 @@ export const messages = {
       modalClose: '닫기',
       items: [
         {
+          id: 'ot-higher-mar-30',
+          title: '3월 30일(월) - HIGHER OT 프로그램 진행',
+          paragraphs: [
+            '안녕하세요, HIGHER 동아리 회장 임도현입니다.',
+            '논산 캠퍼스와 대전 캠퍼스에서 HIGHER OT를 진행했습니다.',
+            '다 와주셔서 감사합니다.',
+          ],
+        },
+        {
           id: 'ot-schedule-mar-24',
           title: '3월 24일(화) - OT일정 확정',
           paragraphs: [
@@ -112,7 +121,7 @@ export const messages = {
       title: 'HIGHER와 함께하고싶다면?',
       periodLabel: '모집 기간',
       period:
-        '신입회원은 상시 모집중이며 건양대학교 학생이면 누구나 가입할 수 있습니다.',
+        '신입 회원 모집은 현재 일시적으로 중단되었으며, 2기 모집 시 지원해 주시기 바랍니다.',
       feeLabel: '회비',
       fee: '회비는 없습니다. 노트북과 충전기만 준비해주세요.',
       applyLabel: '지원',
@@ -196,6 +205,15 @@ export const messages = {
       modalClose: 'Close',
       items: [
         {
+          id: 'ot-higher-mar-30',
+          title: 'Mon, Mar 30 — HIGHER OT program',
+          paragraphs: [
+            'Hello, this is Lim Do-hyun, president of HIGHER.',
+            'We held HIGHER OT at the Nonsan and Daejeon campuses.',
+            'Thank you everyone for coming.',
+          ],
+        },
+        {
           id: 'ot-schedule-mar-24',
           title: 'Tue, Mar 24 — OT schedule confirmed',
           paragraphs: [
@@ -240,7 +258,7 @@ export const messages = {
       title: 'Want to join HIGHER?',
       periodLabel: 'Recruitment period',
       period:
-        'New members are always welcome. Any Konyang University student can join.',
+        'New member recruitment is temporarily paused. Please apply when we open recruitment for the second cohort.',
       feeLabel: 'Fee',
       fee: 'No membership fee—just bring your laptop and charger.',
       applyLabel: 'Apply',
